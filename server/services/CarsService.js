@@ -40,10 +40,14 @@ class CarsService {
         // NOTE set the orig car properities equal the changes that came in from the req.body
         originalCar.make = carEdits.make ? carEdits.make : originalCar.make
         originalCar.model = carEdits.model ? carEdits.model : originalCar.model
-        originalCar.year = carEdits.year || originalCar.year
+        originalCar.year = carEdits.year || originalCar.year // we can also handle edits with pipe operator
         originalCar.price = carEdits.price ? carEdits.price : originalCar.price
         originalCar.description = carEdits.description ? carEdits.description : originalCar.description
-        originalCar.leaksOil = carEdits.leaksOil ? carEdits.leaksOil : originalCar.leaksOil
+
+        // NOTE 'null' is false in truthy/falsy logic so we don't want it to auto default to false
+        // NOTE boolean values we want to perform a null check to make sure this does not send as 'null'
+        originalCar.leaksOil = carEdits.leaksOil != null ? carEdits.leaksOil : originalCar.leaksOil
+
         originalCar.transmissionType = carEdits.transmissionType ? carEdits.transmissionType : originalCar.transmissionType
 
         await originalCar.save() //// NOTE save those changes to the document in the database
