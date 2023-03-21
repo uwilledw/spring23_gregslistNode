@@ -1,0 +1,4 @@
+node_modules 
+.env
+
+# NOTE anything here will not be pushed up to github
